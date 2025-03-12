@@ -67,7 +67,7 @@ return [
     
     'default_users' => [
         'admin' => [
-            'name' => 'SquadDev',
+            'name' => 'Administrador',
             'email' => 'squadev@squaddev.com',
             'password' => 'squaddev123',
         ],

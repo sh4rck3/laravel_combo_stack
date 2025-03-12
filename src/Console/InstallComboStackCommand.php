@@ -4,6 +4,7 @@ namespace Sh4rck3\LaravelComboStack\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Process\Process;
 
 
 class InstallComboStackCommand extends Command
@@ -54,7 +55,7 @@ class InstallComboStackCommand extends Command
     {
         $userModelPath = app_path('Models/User.php');
         $backupModelPath = app_path('Models/User_backup_' . date('Ymd_His') . '.php');
-        $stubPath = app_path('stubs/User.stub');
+        $stubPath = __DIR__.'/../../resources/stubs/Models/User.php';
 
         if (File::exists($userModelPath)) {
             // Criar backup do arquivo original
