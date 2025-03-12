@@ -1,0 +1,30 @@
+{
+    "name": "sh4rck3/laravel_combo_stack",
+    "description": "Pacote que instala Jetstream, Spatie e outras ferramentas uteis do laravel, pacote bem indicado para iniciar um projeto com padrao monolito com api, com frontend em vuejs 3 padrao scritp setup",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sh4rck3\\LaravelComboStack\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luccas Woiciechoski",
+            "email": "sh4rck3@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "laravel/framework": "^12.1",
+        "laravel/jetstream": "^5.3",
+        "spatie/laravel-permission": "^6.16"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sh4rck3\\LaravelComboStack\\ComboStackServiceProvider"
+            ]
+        }
+    }
+}
