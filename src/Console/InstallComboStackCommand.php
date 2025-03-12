@@ -24,18 +24,8 @@ class InstallComboStackCommand extends Command
         $this->publishConfig();
 
         // Substituir o model User pelo stub e fazer backup do antigo
-        //$this->replaceUserModelWithStub();
+        $this->replaceUserModelWithStub();
 
-         // Perguntar ao usuário se deseja continuar com a substituição do model User
-         if ($this->confirm('Deseja substituir o model User pelo stub e fazer backup do antigo?')) {
-            // Substituir o model User pelo stub e fazer backup do antigo
-            if (!$this->replaceUserModelWithStub()) {
-                return;
-            }
-        } else {
-            $this->info('Processo de substituição do model User cancelado.');
-            return;
-        }
         
         // Configurar papéis e permissões
         $this->setupRolesAndPermissions();
@@ -62,31 +52,17 @@ class InstallComboStackCommand extends Command
 
     protected function replaceUserModelWithStub()
     {
-        // Caminho do arquivo de origem no seu pacote
-        $sourcePath = resource_path('stubs/Models/User.php');
-        
-        // Verifica se o arquivo stub existe
-        if (!File::exists($sourcePath)) {
-            $this->error("O arquivo de template User.php não foi encontrado no pacote!");
-            return false;
+        $userModelPath = app_path('Models/User.php');
+        $backupModelPath = app_path('Models/User_backup_' . date('Ymd_His') . '.php');
+        $stubPath = app_path('stubs/User.stub');
+
+        if (File::exists($userModelPath)) {
+            // Criar backup do arquivo original
+            File::copy($userModelPath, $backupModelPath);
         }
 
-        // Caminho de destino no projeto Laravel
-        $destinationPath = app_path('Models/User.php');
-
-        // Se o arquivo já existe, faz backup automaticamente
-        if (File::exists($destinationPath)) {
-            // Criar backup com timestamp para evitar sobrescrever backups anteriores
-            $backupPath = $destinationPath . '.backup-' . date('Y-m-d_H-i-s');
-            File::copy($destinationPath, $backupPath);
-            $this->info('Backup do User.php original criado em: ' . $backupPath);
-        }
-
-        // Copiar o arquivo sem perguntar
-        File::copy($sourcePath, $destinationPath);
-        $this->info('Arquivo User.php personalizado publicado com sucesso.');
-
-        return true;
+        // Copiar o stub para o local do model User
+        File::copy($stubPath, $userModelPath);
     }
 
     protected function installNpmDependencies()
