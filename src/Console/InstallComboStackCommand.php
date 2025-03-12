@@ -24,7 +24,18 @@ class InstallComboStackCommand extends Command
         $this->publishConfig();
 
         // Substituir o model User pelo stub e fazer backup do antigo
-        $this->replaceUserModelWithStub();
+        //$this->replaceUserModelWithStub();
+
+         // Perguntar ao usuário se deseja continuar com a substituição do model User
+         if ($this->confirm('Deseja substituir o model User pelo stub e fazer backup do antigo?')) {
+            // Substituir o model User pelo stub e fazer backup do antigo
+            if (!$this->replaceUserModelWithStub()) {
+                return;
+            }
+        } else {
+            $this->info('Processo de substituição do model User cancelado.');
+            return;
+        }
         
         // Configurar papéis e permissões
         $this->setupRolesAndPermissions();
