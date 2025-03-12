@@ -1,28 +1,28 @@
-import './bootstrap';
-import '../css/app.css';
+import './bootstrap'
+import '../css/app.css'
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/vue3'
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 
 // Importar plugins
-import PermissionsPlugin from './Plugins/Permissions';
+import PermissionsPlugin from './Plugins/Permissions'
 
 // Importar bibliotecas externas
 import vSelect from "vue-select";
-import 'vue-select/dist/vue-select.css';
+import 'vue-select/dist/vue-select.css'
 
-import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
-import ToastPlugin from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
+import ToastPlugin from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
-import { TailwindPagination } from 'laravel-vue-pagination';
+import { TailwindPagination } from 'laravel-vue-pagination'
 
-import Vuex from 'vuex';
-import { store } from './Store/MyStore';
+import Vuex from 'vuex'
+import { store } from './Store/MyStore'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -38,7 +38,7 @@ import VueApexCharts from "vue3-apexcharts"
 import VCalendar from 'v-calendar'
 import 'v-calendar/style.css'
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
 // Inicializar AOS
 document.addEventListener('DOMContentLoaded', () => {
