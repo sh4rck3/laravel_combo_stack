@@ -233,7 +233,7 @@ class InstallComboStackCommand extends Command
         $config = config('combo-stack');
 
         $this->info('Instalando Spatie Permission...');
-        $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
+       // $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
         $this->call('migrate');
 
          // Configura papéis e permissões do Spatie baseados na configuração
