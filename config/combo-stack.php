@@ -41,15 +41,26 @@ return [
     'roles' => [
         'admin' => [
             'name' => 'Administrador',
-            'permissions' => ['gerenciar-usuarios', 'gerenciar-conteudo', 'acessar-relatorios'],
+            'permissions' => [
+                'ler',
+                'editar',
+                'escrever',
+                'deletar',
+            ],
         ],
         'manager' => [
             'name' => 'Gerente',
-            'permissions' => ['gerenciar-conteudo', 'acessar-relatorios'],
+            'permissions' => [
+                'ler',
+                'editar',
+                'escrever',
+            ],
         ],
         'user' => [
             'name' => 'Usuário',
-            'permissions' => ['acessar-conteudo'],
+            'permissions' => [
+                'ler',
+            ],
         ],
     ],
 

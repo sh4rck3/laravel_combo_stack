@@ -21,11 +21,13 @@ class InstallComboStackCommand extends Command
         $this->installJetstream();
         $this->installSpatiePermission();
 
+        // Substituir o model User pelo stub e fazer backup do antigo
+        $this->replaceUserModelWithStub();
+
         // Configurar o arquivo de configuração
         $this->publishConfig();
 
-        // Substituir o model User pelo stub e fazer backup do antigo
-        $this->replaceUserModelWithStub();
+        
 
         
         // Configurar papéis e permissões
