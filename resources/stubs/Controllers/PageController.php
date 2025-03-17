@@ -38,4 +38,12 @@ class PageController extends Controller
     {
         return Inertia::render('Profile/Show');
     }
+
+     /**
+     * Renderiza a página de exemplos de input
+     */
+    public function example()
+    {
+        return Inertia::render('Example');
+    }
 }

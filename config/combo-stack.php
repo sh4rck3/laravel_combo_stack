@@ -79,17 +79,17 @@ return [
     'default_users' => [
         'admin' => [
             'name' => 'Administrador',
-            'email' => 'administrador@squaddev.com',
+            'email' => 'administrador@squaddev.bsb.br',
             'password' => 'squaddev123',
         ],
         'manager' => [
             'name' => 'Gerente',
-            'email' => 'gerente@squaddev.com',
+            'email' => 'gerente@squaddev.bsb.br',
             'password' => 'squaddev123',
         ],
         'user' => [
             'name' => 'Usuário',
-            'email' => 'usuario@squaddev.com',
+            'email' => 'usuario@squaddev.bsb.br',
             'password' => 'squaddev123',
         ],
     ],
