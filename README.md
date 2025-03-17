@@ -65,31 +65,31 @@ O sistema vem com os seguintes papéis pré-configurados:
 
 ```vue
 <!-- Verificando um papel específico -->
-<div v-if="$hasRole('admin')">
-  Conteúdo exclusivo para administradores
-</div>
+<div v-if="$hasRole('Administrador')" class="p-2 bg-green-100 dark:bg-green-800 rounded text-gray-900 dark:text-gray-100">
+              Você tem o papel de Administrador
+          </div>
 
 <!-- Verificando uma permissão específica -->
-<div v-if="$can('gerenciar-usuarios')">
-  <button>Gerenciar Usuários</button>
-</div>
+<div v-if="$can('gerenciar-usuarios')" class="p-2 bg-green-100 dark:bg-green-800 rounded text-gray-900 dark:text-gray-100">
+              Você pode gerenciar usuários
+          </div>
 
 <!-- Verificando vários papéis -->
-<div v-if="$hasAnyRole(['admin', 'editor'])">
-  Conteúdo para administradores ou editores
-</div>
+ <div v-if="$hasAnyRole(['Administrador', 'Gerente'])" class="p-2 bg-green-100 dark:bg-green-800 rounded text-gray-900 dark:text-gray-100">
+              Você é um Administrador ou Gerente
+          </div>
 
 <!-- Verificando várias permissões -->
-<div v-if="$canAny(['editar-posts', 'publicar-posts'])">
-  <button>Gerenciar Publicações</button>
-</div>
+<div v-if="$canAny(['gerenciar-usuarios', 'visualizar-usuarios'])" class="p-2 bg-green-100 dark:bg-green-800 rounded text-gray-900 dark:text-gray-100">
+              Você pode gerenciar ou visualizar usuários
+          </div>
 ```
 
 ### Verificando no Backend (Controllers)
 
 ```php
 // Verificando um papel
-if ($user->hasRole('admin')) {
+if ($user->hasRole('Administrador')) {
     // Lógica para administradores
 }
 
@@ -99,7 +99,7 @@ if ($user->can('gerenciar-usuarios')) {
 }
 
 // Protegendo rotas com middleware
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:Administrador'])->group(function () {
     // Rotas acessíveis apenas para administradores
 });
 
