@@ -94,7 +94,7 @@
       //console.log(pagePermission);
       //console.log(pageRole.includes('administrador'))
       //console.log(pageRole);
-      console.log(page.props.auth.user)
+      //console.log(page.props.auth.user)
   
       
   })

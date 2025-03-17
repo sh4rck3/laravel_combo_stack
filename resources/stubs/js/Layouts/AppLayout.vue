@@ -14,7 +14,7 @@ const isSidebarExpanded = ref(true)
 
 const handleToggleSidebar = (expanded) => {
     isSidebarExpanded.value = expanded
-    console.log(isSidebarExpanded.value)
+    //console.log(isSidebarExpanded.value)
 }
 
 </script>
@@ -23,8 +23,9 @@ const handleToggleSidebar = (expanded) => {
         <Head :title="title" />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            
-            <NavBar />
+            <div :class="[isSidebarExpanded ? 'main-expanded' : 'main-collapsed']">
+                <NavBar  />
+            </div>
 
             <!-- Page Heading -->
             <header v-if="$slots.header" :class="[isSidebarExpanded ? 'header-expanded' : 'header-collapsed']">
@@ -37,7 +38,7 @@ const handleToggleSidebar = (expanded) => {
 
             <!-- Page Content -->
             <main :class="[isSidebarExpanded ? 'main-expanded' : 'main-collapsed']">
-                <slot :isSidebarExpanded="isSidebarExpanded" />
+                <slot  />
             </main>
         </div>
     </div>

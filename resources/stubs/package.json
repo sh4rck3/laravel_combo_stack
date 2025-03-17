@@ -24,6 +24,7 @@
     "dependencies": {
       "@devindex/vue-mask": "^2.0.3",
       "@fullcalendar/vue3": "^6.1.10",
+      "@heroicons/vue": "^2.2.0",
       "aos": "^2.3.4",
       "laravel-vue-pagination": "^4.1.1",
       "sweetalert2": "^11.10.5",

@@ -99,6 +99,80 @@ class InstallComboStackCommand extends Command
         File::copy($sourceStore . '/MyStore.js', $destStore . '/MyStore.js');
         $this->info('Store Vuex configurada com sucesso.');
 
+        // Copiar o arquivo tailwind.config.js
+        $sourceTailwindConfig = __DIR__.'/../../resources/stubs/tailwind.config.js';
+        $destTailwindConfig = base_path('tailwind.config.js');
+        
+        if (File::exists($destTailwindConfig)) {
+            // Fazer backup do tailwind.config.js original
+            $backupPath = $destTailwindConfig . '.backup-' . date('Y-m-d_H-i-s');
+            File::copy($destTailwindConfig, $backupPath);
+            $this->info('Backup do tailwind.config.js original criado em: ' . $backupPath);
+        }
+        
+        // Copiar tailwind.config.js
+        File::copy($sourceTailwindConfig, $destTailwindConfig);
+        $this->info('Arquivo tailwind.config.js copiado com sucesso.');
+
+        // Copiar a pasta Icons
+        $sourceIcons = __DIR__.'/../../resources/stubs/js/Icons';
+        $destIcons = resource_path('js/Icons');
+        
+        if (!File::isDirectory($destIcons)) {
+            File::makeDirectory($destIcons, 0755, true);
+        }
+        
+        // Copiar arquivos de ícones SVG
+        $iconFiles = File::allFiles($sourceIcons);
+        foreach ($iconFiles as $file) {
+            $destFile = $destIcons . '/' . $file->getFilename();
+            if (File::exists($destFile)) {
+                // Fazer backup do arquivo existente
+                $backupPath = $destFile . '.backup-' . date('Y-m-d_H-i-s');
+                File::copy($destFile, $backupPath);
+                $this->info('Backup do ' . $file->getFilename() . ' original criado em: ' . $backupPath);
+            }
+            File::copy($file->getPathname(), $destFile);
+        }
+        $this->info('Ícones SVG copiados com sucesso.');
+
+         // Copiar arquivos de layout e subpastas
+        $layoutFiles = File::allFiles($sourceLayouts);
+        foreach ($layoutFiles as $file) {
+            $relativePath = str_replace($sourceLayouts, '', $file->getPathname());
+            $destFile = $destLayouts . $relativePath;
+            $destDir = dirname($destFile);
+            
+            if (!File::isDirectory($destDir)) {
+                File::makeDirectory($destDir, 0755, true);
+            }
+            
+            if (File::exists($destFile)) {
+                // Fazer backup do arquivo existente
+                $backupPath = $destFile . '.backup-' . date('Y-m-d_H-i-s');
+                File::copy($destFile, $backupPath);
+                $this->info('Backup do ' . $file->getFilename() . ' original criado em: ' . $backupPath);
+            }
+            File::copy($file->getPathname(), $destFile);
+        }
+        $this->info('Layouts copiados com sucesso.');
+
+        // Copiar o arquivo app.blade.php
+        $sourceAppBlade = __DIR__.'/../../resources/stubs/views/app.blade.php';
+        $destAppBlade = resource_path('views/app.blade.php');
+        
+        if (File::exists($destAppBlade)) {
+            // Fazer backup do app.blade.php original
+            $backupPath = $destAppBlade . '.backup-' . date('Y-m-d_H-i-s');
+            File::copy($destAppBlade, $backupPath);
+            $this->info('Backup do app.blade.php original criado em: ' . $backupPath);
+        }
+        
+        // Copiar app.blade.php
+        File::copy($sourceAppBlade, $destAppBlade);
+        $this->info('Arquivo app.blade.php copiado com sucesso.');
+
+
         // Perguntar ao usuário se deseja instalar as dependências NPM
         if ($this->confirm('Deseja instalar as dependências NPM agora?', true)) {
             $this->info('Instalando dependências NPM. Isso pode levar alguns minutos...');
@@ -137,9 +211,15 @@ class InstallComboStackCommand extends Command
             
             // Dashboard modificado (opcional)
             'js/Pages/Dashboard.vue' => resource_path('js/Pages/Dashboard.vue'),
+
+            //Exemplo de pagina de input
+            'js/Pages/Example.vue' => resource_path('js/Pages/Example.vue'),
             
             // App.js modificado
             'js/app.js' => resource_path('js/app.js'),
+
+            // Componente DarkMode
+            'js/Components/DarkMode/DarkMode.vue' => resource_path('js/Components/DarkMode/DarkMode.vue'),
         ];
         
         // Processar cada arquivo
@@ -338,6 +418,7 @@ class InstallComboStackCommand extends Command
                             'verified',
                         ])->group(function () {
                             Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+                            Route::get('/example', [PageController::class, 'example'])->name('example');
                         });
                         EOT;
 
