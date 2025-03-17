@@ -136,6 +136,14 @@ class InstallComboStackCommand extends Command
         }
         $this->info('Ícones SVG copiados com sucesso.');
 
+        // Copiar a pasta Layouts e suas subpastas
+        $sourceLayouts = __DIR__.'/../../resources/stubs/js/Layouts';
+        $destLayouts = resource_path('js/Layouts');
+        
+        if (!File::isDirectory($destLayouts)) {
+            File::makeDirectory($destLayouts, 0755, true);
+        }
+
          // Copiar arquivos de layout e subpastas
         $layoutFiles = File::allFiles($sourceLayouts);
         foreach ($layoutFiles as $file) {
@@ -158,7 +166,7 @@ class InstallComboStackCommand extends Command
         $this->info('Layouts copiados com sucesso.');
 
         // Copiar o arquivo app.blade.php
-        $sourceAppBlade = __DIR__.'/../../resources/stubs/views/app.blade.php';
+        $sourceAppBlade = __DIR__.'/../../resources/stubs/js/views/app.blade.php';
         $destAppBlade = resource_path('views/app.blade.php');
         
         if (File::exists($destAppBlade)) {
