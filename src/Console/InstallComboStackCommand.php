@@ -16,13 +16,15 @@ class InstallComboStackCommand extends Command
     public function handle()
     {
         $this->info('Instalando Combo Stack...');
+
+        // Substituir o model User pelo stub e fazer backup do antigo
+        $this->replaceUserModelWithStub();
         
         // Instala componentes principais
         $this->installJetstream();
         $this->installSpatiePermission();
 
-        // Substituir o model User pelo stub e fazer backup do antigo
-        $this->replaceUserModelWithStub();
+      
 
         // Configurar o arquivo de configuração
         $this->publishConfig();
@@ -96,8 +98,23 @@ class InstallComboStackCommand extends Command
         }
         
         // Copiar o arquivo MyStore.js
-        File::copy($sourceStore . '/MyStore.js', $destStore . '/MyStore.js');
+        File::copy($sourceStore . '/MyStore.js', $destStore . '/Mystore.js');
         $this->info('Store Vuex configurada com sucesso.');
+
+
+        // Copiar a pasta Store Menu
+        $sourceStore = __DIR__.'/../../resources/stubs/js/Pages/Store';
+        $destStore = resource_path('js/Pages/Store');
+        
+        if (!File::isDirectory($destStore)) {
+            File::makeDirectory($destStore, 0755, true);
+        }
+        
+        // Copiar o arquivo Mystore.js menu
+        File::copy($sourceStore . '/Mysotre.js', $destStore . '/Mysotre.js');
+        $this->info('Store Menu configurada com sucesso.');
+
+        
 
         // Copiar o arquivo tailwind.config.js
         $sourceTailwindConfig = __DIR__.'/../../resources/stubs/tailwind.config.js';
@@ -135,6 +152,35 @@ class InstallComboStackCommand extends Command
             File::copy($file->getPathname(), $destFile);
         }
         $this->info('Ícones SVG copiados com sucesso.');
+
+        // Copiar a pasta Layouts e suas subpastas
+        $sourceComponents = __DIR__.'/../../resources/stubs/js/Components/Input';
+        $destComponent = resource_path('js/Components/Input');
+        
+        if (!File::isDirectory($destComponent)) {
+            File::makeDirectory($destComponent, 0755, true);
+        }
+
+         // Copiar arquivos de componentes e subpastas
+        $componentesFile = File::allFiles($sourceComponents);
+        foreach ($componentesFile as $file) {
+            $relativePath = str_replace($sourceComponents, '', $file->getPathname());
+            $destFile = $destComponent . $relativePath;
+            $destDir = dirname($destFile);
+            
+            if (!File::isDirectory($destDir)) {
+                File::makeDirectory($destDir, 0755, true);
+            }
+            
+            if (File::exists($destFile)) {
+                // Fazer backup do arquivo existente
+                $backupPath = $destFile . '.backup-' . date('Y-m-d_H-i-s');
+                File::copy($destFile, $backupPath);
+                $this->info('Backup do ' . $file->getFilename() . ' original criado em: ' . $backupPath);
+            }
+            File::copy($file->getPathname(), $destFile);
+        }
+        $this->info('Componentes de input copiados com sucesso.');
 
         // Copiar a pasta Layouts e suas subpastas
         $sourceLayouts = __DIR__.'/../../resources/stubs/js/Layouts';

@@ -11,8 +11,8 @@ import PermissionExample from '@/Components/PermissionExample.vue';
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="">
+            <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
                     <!-- <Welcome /> -->
                     <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Bem-vindo ao Laravel Combo Stack!</h2>
