@@ -1,4 +1,5 @@
 # Laravel Combo Stack
+![Laravel Combo Stack](src/img/Combo_stack_squaddev.png)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sh4rck3/laravel_combo_stack.svg?style=flat-square)](https://packagist.org/packages/sh4rck3/laravel_combo_stack)
 [![Total Downloads](https://img.shields.io/packagist/dt/sh4rck3/laravel_combo_stack.svg?style=flat-square)](https://packagist.org/packages/sh4rck3/laravel_combo_stack)
