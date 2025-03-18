@@ -15,6 +15,12 @@ class InstallComboStackCommand extends Command
 
     public function handle()
     {
+
+        $this->info('Instalando Laravel Sanctum...');
+        $this->call('composer', ['require', 'laravel/sanctum']);
+        $this->call('vendor:publish', ['--provider' => 'Laravel\Sanctum\SanctumServiceProvider']);
+        $this->call('migrate');
+        
         $this->info('Instalando Combo Stack...');
 
         // Substituir o model User pelo stub e fazer backup do antigo
